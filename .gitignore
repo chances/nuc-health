@@ -1,3 +1,6 @@
+#ignore target/ maven
+target/
+
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
