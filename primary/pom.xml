@@ -22,7 +22,7 @@
   </dependencies>
 
   <modules>
-      <module>../graphical</module>
+      <module>../gui</module>
   </modules>
 
 </project>
