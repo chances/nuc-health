@@ -26,10 +26,9 @@
         <module name="gui" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="graphical" target="1.5" />
-      <module name="gui" target="1.5" />
-      <module name="nuc-health" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="gui" target="1.8" />
+      <module name="nuc-health" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
