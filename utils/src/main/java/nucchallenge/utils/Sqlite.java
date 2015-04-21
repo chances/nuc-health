@@ -67,11 +67,11 @@ public class Sqlite {
                 Statement statement = null;
                 statement = connection.createStatement();
                 statement.executeUpdate("DROP TABLE " + table_name + ";");
+                System.out.println("Dropped table successfully");
             }
         } catch (SQLException e) {
             System.err.println(e);
         }
-        System.out.println("Dropped table successfully");
     }
 
     public void insert(String insert) {
@@ -81,7 +81,6 @@ public class Sqlite {
                 statement = connection.createStatement();
                 statement.executeUpdate(insert);
                 statement.close();
-                //connection.commit();
             }
         } catch (SQLException e) {
             System.err.println(e);

@@ -48,9 +48,10 @@ public class SqliteTest {
             System.err.println(e);
         }
     }
-
+/*
     @After
     public void takeDown() {
         dbtest.dropTable("PEOPLE");
     }
+*/
 }
