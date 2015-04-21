@@ -81,7 +81,7 @@ public class Sqlite {
                 statement = connection.createStatement();
                 statement.executeUpdate(insert);
                 statement.close();
-                connection.commit();
+                //connection.commit();
             }
         } catch (SQLException e) {
             System.err.println(e);
