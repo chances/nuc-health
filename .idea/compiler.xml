@@ -25,6 +25,7 @@
         <processorPath useClasspath="true" />
         <module name="graphical" />
         <module name="gui" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
