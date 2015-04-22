@@ -15,6 +15,10 @@ target/
 
 #ignore .idea
 .idea/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+
 ## Plugin-specific files:
 
 # IntelliJ
