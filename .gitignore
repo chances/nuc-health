@@ -1,8 +1,11 @@
+#ignore .csv .db
+*.csv
+*.db
+utils/test.db
 #ignore target/ maven
 target/
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-
 ## Directory-based project format:
 
 # User-specific stuff:

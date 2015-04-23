@@ -48,10 +48,15 @@ public class SqliteTest {
             System.err.println(e);
         }
     }
-/*
+
+    @Test
+    public void importCSVFileTest() {
+        System.out.println("importing sqlite.csv -> eegtest");
+        dbtest.importCSV("sqlite.csv", "eegtest");
+    }
+
     @After
     public void takeDown() {
         dbtest.dropTable("PEOPLE");
     }
-*/
 }
