@@ -10,12 +10,13 @@ import org.junit.*;
 public class SqliteTest {
     private Sqlite dbtest;
 
+    @Ignore
     @Before
     public void setUp() throws ClassNotFoundException {
         dbtest = new Sqlite();
         dbtest.connectToDatabase("test.db");
     }
-
+    @Ignore
     @Test
     public void CreateInsertSelect() {
         dbtest.createTable("CREATE TABLE PEOPLE(" +
@@ -49,12 +50,14 @@ public class SqliteTest {
         }
     }
 
+    @Ignore
     @Test
     public void importCSVFileTest() {
         System.out.println("importing sqlite.csv -> eegtest");
         dbtest.importCSV("sqlite.csv", "eegtest");
     }
 
+    @Ignore
     @After
     public void takeDown() {
         dbtest.dropTable("PEOPLE");

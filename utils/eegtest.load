@@ -1,0 +1,4 @@
+load database
+    from '/home/nova/NUCchallenge/nuc-health/utils/test.db'
+    into postgresql:///testdb;
+

@@ -6,9 +6,9 @@ package nucchallenge.utils;
 public class Patient {
     private String name;
     private int patientid;
-    private int illnesscodes[];
+    private String illnesscodes[];
 
-    public Patient(String name, int patientid, int[] illnesscodes) {
+    public Patient(String name, int patientid, String[] illnesscodes) {
         this.name = name;
         this.patientid = patientid;
         this.illnesscodes = illnesscodes;
@@ -30,11 +30,11 @@ public class Patient {
         this.patientid = patientid;
     }
 
-    public int[] getIllnesscodes() {
+    public String[] getIllnesscodes() {
         return illnesscodes;
     }
 
-    public void setIllnesscodes(int[] illnesscodes) {
+    public void setIllnesscodes(String[] illnesscodes) {
         this.illnesscodes = illnesscodes;
     }
 

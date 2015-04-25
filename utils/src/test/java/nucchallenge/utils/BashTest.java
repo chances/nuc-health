@@ -2,6 +2,7 @@ package nucchallenge.utils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Random;
  */
 public class BashTest extends Bash {
 
+    @Ignore
     @Test
     public void csvTest() {
         System.out.println("removing first line");
@@ -22,6 +24,7 @@ public class BashTest extends Bash {
         System.out.println("added patient ID:" + id);
     }
 
+    @Ignore
     @Before
     public void setUp() {
         try {

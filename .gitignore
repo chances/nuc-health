@@ -4,6 +4,7 @@
 utils/test.db
 #ignore target/ maven
 target/
+utils/pgloader-3.2.0/
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 ## Directory-based project format:
