@@ -1,6 +1,7 @@
 package nucchallenge.utils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Random;
@@ -22,6 +23,7 @@ public class DemoTest {
         sqlite.connectToDatabase("test.db");
     }
     @Test
+    @Ignore
     public void DemoTest() {
         Random rand = new Random(System.currentTimeMillis());
         String codes[] = new String[] { "D85", "L682" };
