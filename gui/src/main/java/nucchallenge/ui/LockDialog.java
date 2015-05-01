@@ -13,11 +13,17 @@ public class LockDialog extends JDialog
     private DialogResult result;
     private Credentials credentials;
 
+    private final String TITLE = "NUC Health - Login";
+
+    private final String INVALID_CREDENTIALS_ERROR = "Invalid credentials!";
+    private final String INVALID_ENTRY_ERROR = "You must specify credentials!";
+
     private JPanel contentPane;
     private JPanel formPanel;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JLabel errorLabel;
 
     public LockDialog()
     {
@@ -28,9 +34,12 @@ public class LockDialog extends JDialog
         result = DialogResult.NONE;
         credentials = null;
 
-        setTitle("NUC Health - Login");
+        setTitle(TITLE);
         setResizable(false);
         setPreferredSize(contentPane.getMinimumSize());
+
+        errorLabel.setVisible(false);
+        errorLabel.setText(INVALID_ENTRY_ERROR);
 
         loginButton.addActionListener(e -> onOK());
 
@@ -84,6 +93,14 @@ public class LockDialog extends JDialog
 
     private void onOK()
     {
+        errorLabel.setVisible(false);
+
+        if (usernameField.getText().equals("") || String.valueOf(passwordField.getPassword()).equals("")) {
+            errorLabel.setText(INVALID_ENTRY_ERROR);
+        } else {
+            errorLabel.setText(INVALID_CREDENTIALS_ERROR);
+        }
+
         if (credentials != null
                 && credentials.getUsername().equals(usernameField.getText())
                 && credentials.getPassword().equals(String.valueOf(
@@ -93,7 +110,8 @@ public class LockDialog extends JDialog
             result = DialogResult.OK;
             dispose();
         }
-        // TODO: Should we show an error or something if the credentials are invalid?
+
+        errorLabel.setVisible(true);
     }
 
     private void onCancel()
