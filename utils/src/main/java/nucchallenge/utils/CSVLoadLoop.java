@@ -1,48 +1,44 @@
 package nucchallenge.utils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by nova on 4/24/15.
  */
 public class CSVLoadLoop extends Bash implements Runnable {
-    private String csvfile;
+    private String csvFile;
     private File f;
-    private int currentpid;
-    private Sqlite database;
-    private String db;
+    private int pid;
+    private static final String URL = "jdbc:postgresql://localhost/testdb";
+    private static final String USER = "nova";
+    private static final String PASSWD = "123";
 
-    public CSVLoadLoop(String db, String csvfile, int patient_id) {
-        this.csvfile = csvfile;
+    public CSVLoadLoop(String csvFile, int pid) {
+        this.csvFile = csvFile;
         this.f = null;
-        this.currentpid = patient_id;
-        this.db = db;
-        this.database = new Sqlite();
+        this.pid = pid;
     }
 
     @Override
     public void run() {
-        try {
-            database.connectToDatabase(db);
-        } catch (ClassNotFoundException e) {
-
-        }
-
-       loadLoop();
+            loadLoop();
     }
 
     public void loadLoop() {
         while (true) {
-            f = new File(csvfile);
-            File fn = new File("./patient" + currentpid + ".csv");
-            if (f.exists() && !f.isDirectory()) {
-                removeFirstLineCSV(csvfile);
-                addPatientIDToCSV(csvfile, currentpid);
+            f = new File(csvFile);
 
-                if(database != null) {
-                    database.importCSV(csvfile, "eeg");
-                    f.renameTo(fn);
-                }
+            if (f.exists() && !f.isDirectory()) {
+                CSV patientCSV = new CSV();
+                patientCSV.setReader(csvFile);
+                patientCSV.insertIntoDatabase(URL,USER,PASSWD, Integer.toString(pid));
+                patientCSV.close();
+
+                File fn = new File("patient" + pid +".csv");
+
+                f.renameTo(fn);
+                f = null;
             } else {
                 f = null;
                 try {

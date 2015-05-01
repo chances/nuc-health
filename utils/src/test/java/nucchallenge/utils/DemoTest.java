@@ -14,16 +14,18 @@ import java.util.concurrent.ThreadPoolExecutor;
  * Created by nova on 4/24/15.
  */
 public class DemoTest {
-    private Sqlite sqlite;
     private Patient patient;
+    private Postgres database;
+    private static final String URL = "jdbc:postgresql://localhost/testdb";
+    private static final String USER = "nova";
+    private static final String PASSWD = "123";
 
     @Before
     public void setUp() throws ClassNotFoundException {
-        sqlite = new Sqlite();
-        sqlite.connectToDatabase("test.db");
+        database = new Postgres(URL,USER,PASSWD);
+        database.connectToDatabase();
     }
     @Test
-    @Ignore
     public void DemoTest() {
         Random rand = new Random(System.currentTimeMillis());
         String codes[] = new String[] { "D85", "L682" };
@@ -31,20 +33,17 @@ public class DemoTest {
     while (true) {
         patient = new Patient("\'Lisa Gray\'", Math.abs(rand.nextInt() % 100), codes);
         codes = patient.getIllnesscodes();
+        int id = patient.getPatientid();
+        String name = patient.getName();
 
-        sqlite.insert("INSERT INTO patients (ID, NAME, CODES)" +
-                "VALUES (" + patient.getPatientid() + ", " + patient.getName() + ",\'D85\');");
+        database.insert("INSERT INTO patients VALUES(" + id + ',' + name + ",\'" + codes[0] + "\');");
 
-        if(first_pass) {
 
-            DBUpdateLoop dbUpdateLoop = new DBUpdateLoop(60000 / 2);
-            CSVLoadLoop csvLoadLoop = new CSVLoadLoop("test.db", "patient.csv", patient.getPatientid());
+            CSVLoadLoop csvLoadLoop = new CSVLoadLoop("patient.csv", patient.getPatientid());
 
             ExecutorService es = Executors.newFixedThreadPool(4);
 
-            // es.submit(dbUpdateLoop);
-            // es.submit(csvLoadLoop);
-            es.execute(dbUpdateLoop);
+            es.submit(csvLoadLoop);
             es.execute(csvLoadLoop);
 
             es.shutdown();
@@ -55,8 +54,6 @@ public class DemoTest {
 
             }
         } */
-            first_pass = false;
-        } else {
 
             System.out.println("New Patient");
             try {
@@ -65,6 +62,5 @@ public class DemoTest {
 
             }
         }
-    }
     }
 }

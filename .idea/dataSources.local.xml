@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="SQLite -" uuid="87f80c8a-0311-4455-81ef-6e81e5a15d01">
+    <data-source name="SQLite -" uuid="87f80c8a-0311-4455-81ef-6e81e5a15d01" />
+    <data-source name="PostgreSQL - testdb@localhost" uuid="2ead2828-3573-4140-8295-cfe9a859637c">
       <secret-storage>master_key</secret-storage>
+      <user-name>nova</user-name>
+      <schema-pattern>testdb.pg_catalog testdb.public</schema-pattern>
+      <default-schemas>testdb.pg_catalog testdb.public</default-schemas>
     </data-source>
   </component>
 </project>

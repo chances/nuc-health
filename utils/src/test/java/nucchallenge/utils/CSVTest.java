@@ -1,6 +1,7 @@
 package nucchallenge.utils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -16,7 +17,10 @@ public class CSVTest {
     }
 
     @Test
+    @Ignore
     public void PrintListTest() {
-        //file.printList();
+        String url = "jdbc:postgresql://localhost/testdb";
+        String user = "nova"; String passwd = "123";
+        file.insertIntoDatabase(url,user,passwd, "0");
     }
 }

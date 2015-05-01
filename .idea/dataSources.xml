@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1390508744">
+  <component name="DataSourceManagerImpl" format="xml" hash="2683247341">
     <data-source source="LOCAL" name="SQLite -" uuid="87f80c8a-0311-4455-81ef-6e81e5a15d01">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/nuc-health.db</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - testdb@localhost" uuid="2ead2828-3573-4140-8295-cfe9a859637c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/testdb</jdbc-url>
       <libraries />
     </data-source>
   </component>
