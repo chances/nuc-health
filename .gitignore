@@ -17,12 +17,6 @@ utils/pgloader-3.2.0/
 .idea/gradle.xml
 .idea/libraries
 
-#ignore .idea
-.idea/
-.idea/compiler.xml
-.idea/encodings.xml
-.idea/misc.xml
-
 ## Plugin-specific files:
 
 # IntelliJ
