@@ -21,11 +21,13 @@ public class DemoTest {
     private static final String PASSWD = "123";
 
     @Before
+    @Ignore
     public void setUp() throws ClassNotFoundException {
         database = new Postgres(URL,USER,PASSWD);
         database.connectToDatabase();
     }
     @Test
+    @Ignore
     public void DemoTest() {
         Random rand = new Random(System.currentTimeMillis());
         String codes[] = new String[] { "D85", "L682" };

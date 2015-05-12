@@ -14,6 +14,7 @@ public class PostgresTest {
     private Postgres db;
 
     @Before
+    @Ignore
     public void setUp() {
         db = new Postgres("jdbc:postgresql://localhost/testdb");
         db.setUser("nova"); db.setPasswd("123");
@@ -21,6 +22,7 @@ public class PostgresTest {
     }
 
     @Test
+    @Ignore
     public void SelectQueryTest() {
         try {
             ResultSet rs = db.selectQuery("SELECT * FROM patients");

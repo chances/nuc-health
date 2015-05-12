@@ -1,12 +1,16 @@
 package nucchallenge.utils;
 
-import java.io.IOException;import java.io.InputStream;import java.util.logging.Level;import java.util.logging.Logger;
-import gnu.io.*;import sun.misc.Version;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import gnu.io.*;
+import sun.misc.Version;
 
 public class Device /*implements SerialPortEventListener*/ {
     //this is the object that contains the opened port
-    protected CommPortIdentifier selectedPortIdentifier = null;
-    protected SerialPort serialPort = null;
+    private CommPortIdentifier selectedPortIdentifier = null;
+    private SerialPort serialPort = null;
 
     //input and output streams for sending and receiving data
     protected InputStream input = null;
@@ -14,12 +18,12 @@ public class Device /*implements SerialPortEventListener*/ {
     //just a boolean flag that i use for enabling
     //and disabling buttons depending on whether the program
     //is connected to a serial port or not
-    protected boolean bConnected = false;
+    private boolean connected = false;
 
-    protected int baudRate;
-    protected int byteSize;
-    protected int stopBits;
-    protected int parity;
+    private int baudRate;
+    private int byteSize;
+    private int stopBits;
+    private int parity;
 
     public Device() {
 
@@ -47,6 +51,11 @@ public class Device /*implements SerialPortEventListener*/ {
                     serialPort = (SerialPort) commPort;
                     serialPort.setSerialPortParams(baudRate,byteSize,stopBits,parity);
                     input = serialPort.getInputStream();
+                    connected = true;
+                    System.err.println("CONNECTED:");
+                    if(input != null) {
+                        System.err.println("Input != null");
+                    }
                 } else {
                     System.err.println("Error: Only SerialPorts are handled.");
                 }
@@ -67,6 +76,10 @@ public class Device /*implements SerialPortEventListener*/ {
             Logger lgr = Logger.getLogger(Version.class.getName());
             lgr.log(Level.WARNING, e.getMessage(), e);
         }
+    }
+
+    public boolean isConnected() {
+        return connected;
     }
 
 }

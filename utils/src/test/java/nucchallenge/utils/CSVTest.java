@@ -11,6 +11,7 @@ public class CSVTest {
     private CSV file;
 
     @Before
+    @Ignore
     public void setUp() {
         file = new CSV();
         file.setReader("test.csv");
