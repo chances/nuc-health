@@ -29,13 +29,13 @@ public class DemoTest {
     @Test
     @Ignore
     public void DemoTest() {
-        Random rand = new Random(System.currentTimeMillis());
+      /*  Random rand = new Random(System.currentTimeMillis());
         String codes[] = new String[] { "D85", "L682" };
         boolean first_pass = true;
     while (true) {
         patient = new Patient("\'Lisa Gray\'", Math.abs(rand.nextInt() % 100), codes);
         codes = patient.getIllnesscodes();
-        int id = patient.getPatientid();
+        int id = patient.getPatientId();
         String name = patient.getName();
 
         database.insert("INSERT INTO patients VALUES(" + id + ',' + name + ",\'" + codes[0] + "\');");
@@ -64,5 +64,4 @@ public class DemoTest {
 
             }
         }
-    }
 }

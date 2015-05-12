@@ -21,7 +21,7 @@ public class Patient {
         this.name = name;
         this.age = age;
         this.gender = Gender.OTHER;
-        this.illnessCodes = new ArrayList<>();
+        this.illnessCodes = new ArrayList<String>();
         this.illnessCodes.addAll(Arrays.asList(illnessCodes));
     }
 
