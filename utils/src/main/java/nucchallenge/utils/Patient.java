@@ -1,17 +1,36 @@
 package nucchallenge.utils;
 
-/**
- * Created by nova on 4/21/15.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Patient {
+    private int patientId;
     private String name;
     private int patientid;
-    private String illnesscodes[];
+    private int age;
+    private Gender gender;
+    private List<String> illnessCodes;
 
-    public Patient(String name, int patientid, String[] illnesscodes) {
+    public Patient() {
+        this(-1, null, 0, new String[]{});
+    }
+
+    public Patient(int patientId, String name, int age, String[] illnessCodes) {
+        this.patientId = patientId;
         this.name = name;
-        this.patientid = patientid;
-        this.illnesscodes = illnesscodes;
+        this.age = age;
+        this.gender = Gender.OTHER;
+        this.illnessCodes = new ArrayList<>();
+        this.illnessCodes.addAll(Arrays.asList(illnessCodes));
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getName() {
@@ -22,20 +41,32 @@ public class Patient {
         this.name = name;
     }
 
-    public int getPatientid() {
-        return patientid;
+    public int getAge()
+    {
+        return age;
     }
 
-    public void setPatientid(int patientid) {
-        this.patientid = patientid;
+    public void setAge(int age)
+    {
+        this.age = age;
     }
 
-    public String[] getIllnesscodes() {
-        return illnesscodes;
+    public Gender getGender()
+    {
+        return gender;
     }
 
-    public void setIllnesscodes(String[] illnesscodes) {
-        this.illnesscodes = illnesscodes;
+    public void setGender(Gender gender)
+    {
+        this.gender = gender;
+    }
+
+    public List<String> getIllnessCodes() {
+        return illnessCodes;
+    }
+
+    public void setIllnessCodes(List<String> illnessCodes) {
+        this.illnessCodes = illnessCodes;
     }
 
 }

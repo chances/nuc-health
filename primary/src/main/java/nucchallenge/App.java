@@ -3,6 +3,7 @@ package nucchallenge;
 import nucchallenge.ui.Credentials;
 import nucchallenge.ui.DialogResult;
 import nucchallenge.ui.LockDialog;
+import nucchallenge.ui.PatientDialog;
 
 /**
  * Main entry point into the nuc-health application.
@@ -26,6 +27,13 @@ public class App
             DialogResult result = LockDialog.showDialog(credentials);
 
             System.out.println(result.toString());
+
+            if (result == DialogResult.OK) {
+                result = PatientDialog.showDialog(null);
+
+                System.out.println();
+                System.out.println(result.toString());
+            }
         });
     }
 }
