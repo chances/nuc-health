@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-/**
- * Created by nova on 5/11/15.
- */
 public class PulseOxTest {
     private PulseOx pulseOx;
 

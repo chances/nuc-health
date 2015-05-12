@@ -1,0 +1,8 @@
+{
+  "PulseOxTTY":"/dev/ttyUSB0",
+  "BpcTTY":"/dev/ttyUSB1",
+  "PatientCSV":"",
+  "PsqlHostAddress":"",
+  "PsqlUser":"",
+  "PsqlPasswd":""
+}
