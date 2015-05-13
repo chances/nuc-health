@@ -4,6 +4,7 @@ import nucchallenge.ui.Credentials;
 import nucchallenge.ui.DialogResult;
 import nucchallenge.ui.LockDialog;
 import nucchallenge.ui.PatientDialog;
+import nucchallenge.utils.BloodPressureCuff;
 
 /**
  * Main entry point into the nuc-health application.
@@ -12,7 +13,7 @@ public class App
 {
     public static void main(String[] args)
     {
-        final Credentials credentials = new Credentials("nuc", "nuc");
+       /* final Credentials credentials = new Credentials("nuc", "nuc");
 
         System.out.println("Hello Nerds!");
 
@@ -34,6 +35,12 @@ public class App
                 System.out.println();
                 System.out.println(result.toString());
             }
-        });
+        });*/
+
+        BloodPressureCuff bloodPressureCuff = new BloodPressureCuff();
+        int [] bpc = bloodPressureCuff.read();
+        for (int i = 0; i < bpc.length ; i++) {
+           System.out.println(bpc[i]);
+        }
     }
 }
