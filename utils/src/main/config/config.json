@@ -1,8 +1,8 @@
 {
   "PulseOxTTY":"/dev/ttyUSB0",
   "BpcTTY":"/dev/ttyUSB1",
-  "PatientCSV":"",
-  "PsqlHostAddress":"",
-  "PsqlUser":"",
-  "PsqlPasswd":""
+  "PatientCSV":"/tmp/",
+  "PsqlHostAddress":"jdbc:postgresql://localhost/testdb",
+  "PsqlUser":"nova",
+  "PsqlPasswd":"123"
 }
