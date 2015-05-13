@@ -13,15 +13,23 @@ public class PulseOx extends Device {
             /* read in 128 bytes : allows the next two byte size reads to get data */
             input.read(bytes);
 
+            //int x = (int) bytes[0];
+            //System.out.println(x);
+
             /* read in pulse level */
             pulse = input.read();
             /* read in ox level */
             ox = input.read();
+            /*int i3 = input.read();
+            int i4 = input.read();
+           int i5 = input.read();
+           */
 
             /* read in extra byte */
-            int b3 = input.read();
+            input.read();
 
-            //System.out.println(ox + " " + pulse);
+            //System.out.println(ox + " " + pulse + " ");
+            //System.out.println();
         } else {
             System.err.println("Error: input Stream is null");
         }

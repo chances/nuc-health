@@ -2,22 +2,28 @@ package nucchallenge.utils;
 
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by nova on 4/24/15.
  */
-public class CSVLoadLoop extends Bash implements Runnable {
+public class CSVLoadThread extends Bash implements Runnable {
     private String csvFile;
+    private String csvDir;
     private File f;
-    private int pid;
-    private static final String URL = "jdbc:postgresql://localhost/testdb";
-    private static final String USER = "nova";
-    private static final String PASSWD = "123";
+    private AtomicInteger pid;
+    private String dbHost;
+    private String dbUser;
+    private String dbPasswd;
 
-    public CSVLoadLoop(String csvFile, int pid) {
+    public CSVLoadThread(String csvFile, AtomicInteger pid, ConfigManager cm) {
         this.csvFile = csvFile;
         this.f = null;
         this.pid = pid;
+        this.dbHost = cm.getPsqlHost();
+        this.dbUser = cm.getPsqlUser();
+        this.dbPasswd = cm.getPsqlPasswd();
+        this.csvDir = cm.getPatientCSVDir();
     }
 
     @Override
@@ -32,10 +38,10 @@ public class CSVLoadLoop extends Bash implements Runnable {
             if (f.exists() && !f.isDirectory()) {
                 CSV patientCSV = new CSV();
                 patientCSV.setReader(csvFile);
-                patientCSV.insertIntoDatabase(URL,USER,PASSWD, Integer.toString(pid));
+                patientCSV.insertIntoDatabase(dbHost, dbUser, dbPasswd, Integer.toString(pid.get()));
                 patientCSV.close();
 
-                File fn = new File("patient" + pid +".csv");
+                File fn = new File(csvDir + (csvFile.replace(".csv", pid +".csv")));
 
                 f.renameTo(fn);
                 f = null;
@@ -44,7 +50,7 @@ public class CSVLoadLoop extends Bash implements Runnable {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
-
+                    e.printStackTrace();
                 }
             }
         }

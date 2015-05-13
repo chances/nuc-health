@@ -1,35 +1,36 @@
 package nucchallenge.utils;
 
 import java.io.FileReader;
-import org.json.simple.JSONObject;import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class ConfigManager {
     private String pulseOxSerialTTY;
     private String bpcSerialTTY;
-    private String patientCSV;
+    private String patientCSVDir;
     private String psqlHost;
     private String psqlUser;
     private String psqlPasswd;
 
-    ConfigManager() {
+    public ConfigManager() {
         this.pulseOxSerialTTY = null;
         this.bpcSerialTTY = null;
-        this.patientCSV = null;
+        this.patientCSVDir = null;
         this.psqlHost = null;
         this.psqlUser = null;
         this.psqlPasswd = null;
     }
 
-    ConfigManager(String jsonFile) {
+    public ConfigManager(String jsonFile) {
         JSONParser jsonParser = new JSONParser();
 
         try {
-            Object object = jsonParser.parse(new FileReader(System.getProperty("user.dir") + "/src/main/config/" + jsonFile));
+            Object object = jsonParser.parse(new FileReader(System.getProperty("user.dir") + "/utils/src/main/config/" + jsonFile));
             JSONObject jsonObject = (JSONObject) object;
 
             this.pulseOxSerialTTY = (String) jsonObject.get("PulseOxTTY");
             this.bpcSerialTTY = (String) jsonObject.get("BpcTTY");
-            this.patientCSV = (String) jsonObject.get("PatientCSV");
+            this.patientCSVDir = (String) jsonObject.get("PatientCSVDir");
             this.psqlHost = (String) jsonObject.get("PsqlHostAddress");
             this.psqlUser = (String) jsonObject.get("PsqlUser");
             this.psqlPasswd = (String) jsonObject.get("PsqlPasswd");
@@ -49,7 +50,7 @@ public class ConfigManager {
 
             this.pulseOxSerialTTY = (String) jsonObject.get("PulseOxTTY");
             this.bpcSerialTTY = (String) jsonObject.get("BpcTTY");
-            this.patientCSV = (String) jsonObject.get("PatientCSV");
+            this.patientCSVDir = (String) jsonObject.get("PatientCSV");
             this.psqlHost = (String) jsonObject.get("PsqlHostAddress");
             this.psqlUser = (String) jsonObject.get("PsqlUser");
             this.psqlPasswd = (String) jsonObject.get("PsqlPasswd");
@@ -67,8 +68,8 @@ public class ConfigManager {
         return bpcSerialTTY;
     }
 
-    public String getPatientCSV() {
-        return patientCSV;
+    public String getPatientCSVDir() {
+        return patientCSVDir;
     }
 
     public String getPsqlHost() {
