@@ -39,8 +39,8 @@ public class App
 
         BloodPressureCuff bloodPressureCuff = new BloodPressureCuff();
         int [] bpc = bloodPressureCuff.read();
-        for (int i = 0; i < bpc.length ; i++) {
-           System.out.println(bpc[i]);
+        for (int aBpc : bpc) {
+            System.out.println(aBpc);
         }
     }
 }
