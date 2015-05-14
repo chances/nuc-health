@@ -11,11 +11,6 @@ public class BloodPressureCuff {
     }
 
     public int[] read() {
-        BloodPressureCuff bloodPressureCuff = new BloodPressureCuff();
-
          return getValues();
-
-
-
     }
 }

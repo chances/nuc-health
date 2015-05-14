@@ -16,7 +16,8 @@ import java.util.ListIterator;
 public class CSV {
     private static final String PARSE_TABLE_NAME = "\\$\\{table\\}";
     private static final String PARSE_FIELD_VALUE = "\\$\\{values\\}";
-    private static final String SQL_INSERT_QUERY = "INSERT INTO ${table} VALUES(${values})";
+    private static final String SQL_INSERT_QUERY = "INSERT INTO ${table} VALUES ${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}${values}";
+
     private CSVReader reader;
     private Postgres database;
     private List<String[]> entries;
@@ -63,11 +64,40 @@ public class CSV {
             while (csvRowIterator.hasNext()) {
                 String[] row = csvRowIterator.next();
                 String[] goodRowdata = Arrays.copyOfRange(row,0,13);
-                String insert = insertQuery.replaceFirst(PARSE_FIELD_VALUE, pid + ','+ StringUtils.join(goodRowdata,','));
+                String insert = insertQuery.replaceFirst(PARSE_FIELD_VALUE, '(' + pid + ','+ StringUtils.join(goodRowdata,',') +')');
+
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+                insert = getRow(insert, csvRowIterator, pid);
+
+                System.out.println(insert);
                 database.insert(insert);
             }
         }
 
+    }
+
+    private String getRow(String insert, ListIterator<String[]> csvRowIterator, String pid) {
+        if(csvRowIterator.hasNext()) {
+            String [] row = csvRowIterator.next();
+            String [] goodRowdata = Arrays.copyOfRange(row,0,13);
+            return insert.replaceFirst(PARSE_FIELD_VALUE, ",(" + pid + ','+ StringUtils.join(goodRowdata,',') +')');
+        } else {
+            return insert.replaceFirst(PARSE_FIELD_VALUE, "");
+        }
     }
 
     public void printList() {

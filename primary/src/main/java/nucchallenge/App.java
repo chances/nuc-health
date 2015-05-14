@@ -1,14 +1,8 @@
 package nucchallenge;
 
-import nucchallenge.ui.Credentials;
-import nucchallenge.ui.DialogResult;
-import nucchallenge.ui.LockDialog;
-import nucchallenge.ui.PatientDialog;
-import nucchallenge.utils.BloodPressureCuff;
-import nucchallenge.utils.ConfigManager;
-import nucchallenge.utils.PulseOx;
-import nucchallenge.utils.PulseOxThread;
+import nucchallenge.utils.*;
 
+import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -68,19 +62,38 @@ public class App
             System.out.println(aBpc);
         }*/
 
+
+        /* Set Up Devices*/
+        BloodPressureCuffTask bloodPressureCuffTask = new BloodPressureCuffTask(pid,configs);
+        CSVLoadTask csvLoadTask = new CSVLoadTask("patient.csv", pid, configs);
         PulseOxThread pulseOxThread = new PulseOxThread(pid,configs);
+        BloodPressureCuffThread bloodPressureCuffThread = new BloodPressureCuffThread(bloodPressureCuffTask);
+        CSVLoadThread csvLoadThread = new CSVLoadThread(csvLoadTask);
+
         ExecutorService es = Executors.newSingleThreadExecutor();
+        ExecutorService es2 = Executors.newSingleThreadScheduledExecutor();
+        ExecutorService es3 = Executors.newSingleThreadScheduledExecutor();
 
         es.submit(pulseOxThread);
-        es.execute(pulseOxThread);
+        es2.submit(bloodPressureCuffThread);
+        es3.submit(csvLoadThread);
 
-        es.shutdownNow();
-        while (!es.isTerminated()) {
+        es.execute(pulseOxThread);
+        es2.execute(bloodPressureCuffThread);
+        es3.execute(csvLoadThread);
+
+        es.shutdown();
+        es2.shutdown();
+        es3.shutdown();
+        while (!es3.isTerminated() || !es.isTerminated() || !es2.isTerminated() ) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                es.shutdownNow();
                 e.printStackTrace();
+            } finally {
+                es.shutdownNow();
+                es2.shutdownNow();
+                es3.shutdownNow();
             }
         }
     }
