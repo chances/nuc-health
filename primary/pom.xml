@@ -12,6 +12,10 @@
 
   <url>http://maven.apache.org</url>
 
+  <modules>
+    <module>../gui</module>
+  </modules>
+
   <build>
     <plugins>
       <plugin>

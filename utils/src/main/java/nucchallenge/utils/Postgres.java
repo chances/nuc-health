@@ -3,6 +3,8 @@ package nucchallenge.utils;
 import sun.misc.Version;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,6 +50,91 @@ public class Postgres {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public ArrayList<BloodPressure> selectBloodPressure() {
+        return selectBloodPressure(-1);
+    }
+
+    public ArrayList<BloodPressure> selectBloodPressure(int limit) {
+        ArrayList<BloodPressure> metrics = new ArrayList<>();
+        String query = "SELECT * FROM bloodpressure ORDER BY daterecorded DESC";
+
+        if (limit > 0) {
+            query += " LIMIT " + limit;
+        }
+
+        try {
+            if(connection != null) {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    BloodPressure bp = new BloodPressure(
+                            resultSet.getTimestamp("daterecorded").toLocalDateTime(),
+                            resultSet.getInt("sys"),
+                            resultSet.getInt("dia"),
+                            resultSet.getInt("pulse")
+                    );
+                    metrics.add(bp);
+                }
+            }
+        } catch (SQLException e) {
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, e.getMessage(), e);
+            }
+        }
+
+        return metrics;
+    }
+
+    public ArrayList<Pulse> selectPuleOx() {
+        return selectPuleOx(-1);
+    }
+
+    public ArrayList<Pulse> selectPuleOx(int limit) {
+        ArrayList<Pulse> metrics = new ArrayList<>();
+        String query = "SELECT * FROM pulseox WHERE oxygen > 40 ORDER BY timerecorded DESC";
+
+        if (limit > 0) {
+            query += " LIMIT " + limit;
+        }
+
+        try {
+            if(connection != null) {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    Pulse pulse = new Pulse(
+                            resultSet.getTimestamp("timerecorded").toLocalDateTime(),
+                            resultSet.getInt("oxygen"),
+                            resultSet.getInt("pulse")
+                    );
+                    metrics.add(pulse);
+                }
+            }
+        } catch (SQLException e) {
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, e.getMessage(), e);
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e) {
+                Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, e.getMessage(), e);
+            }
+        }
+
+        return metrics;
     }
 
     public void insert(String st) {
